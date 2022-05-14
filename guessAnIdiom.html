@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<!-- <HEAD> region for meta tags ................................................................................... -->
+
+<HTML lang="en">
+
+<HEAD>
+    <META charset="UTF-8">
+    <META name="viewport" content="width=device-width, initial-scale=1.0">
+    <META http-equiv="X-UA-Compatible" content="ie=edge">
+    <META name="description" content="Main index to risingfast website">
+    <META name="keywords" content="html, css, cgi">
+    <META name="generator" content="vim">
+    <META name="author" content="risingfast">
+    <TITLE>guessAnIdiom.html</TITLE>
+    <LINK rel="stylesheet" type="text/css" href="index.css">
+    <LINK rel="shortcut icon" href="letterRF.png" type="image/png">
+</HEAD>
+
+<!-- Comments region ............................................................................................... -->
+<!--                                                                                                                 -->
+<!-- guessAnIdion.html -  grid layout of the original guessAnIdiom.html                                              -->
+<!-- References:                                                                                                     -->
+<!--      https://www.youtube.com/watch?v=qTGbWfEEnKI                                                                -->
+<!--          Easily Structure your Layout with CSS Grid's 'grid-template-areas'                                     -->
+<!-- Templates:                                                                                                      -->
+<!--      d_template.html                                                                                            -->
+<!-- Log:                                                                                                            -->
+<!--    18-Sep-2021 - start                                                                                          -->
+<!--    18-Sep-2021 - change original guessAnIdiom.html to grid layout                                               -->
+<!--    19-Sep-2021 - add Internals section                                                                          -->
+<!--    27-Sep-2021 - move to non-CGI result format                                                                  -->
+<!--    28-Sep-2021 - change vertical margins                                                                        -->
+<!--    30-Sep-2021 - update the footer text to match the filename                                                   -->
+<!--    03-Oct-2021 - rename functions and add Clear button                                                          -->
+<!--    11-May-2022 - add <ASIDE3> caption reggion for corner image                                                  -->
+<!--                                                                                                                 -->
+<!-- <BODY> region for all content including header and footer ..................................................... -->
+
+<BODY onload=fClearPage()>
+    <DIV ID="WRAPPER1">
+        <DIV ID="WRAPPER2">
+            <HEADER ID="HEADER1">
+                <BR>
+                <DIV ID="HEADER1DIV">
+                     <H2>www.Risingfast.com</H2>
+                </DIV>
+            </HEADER>
+            <NAV ID="NAV1">
+                    <H3 ID="NAV1H3">Links</H3>
+                <UL ID="NAV1UL">
+                    <LI class="NAV1LI"><A class="active" HREF="http://www.risingfast.com">Home</A></LI>
+                    <LI class="NAV1LI"><A HREF="http://www.risingfast.com/d_ajaxFetch.html">Latest</A></LI>
+                    <LI class="NAV1LI"><A HREF="http://www.risingfast.com/d_template.html">Template</A></LI>
+                    <LI class="NAV1LI"><A HREF="http://www.risingfast.com/email.html">Email</A></LI>
+                    <LI class="NAV1LI"><A HREF="http://www.risingfast.com/about.html">About</A></LI>
+                </UL>
+            </NAV>
+
+<!-- <MAIN> region for main content and background image ........................................................... -->
+
+            <MAIN ID="MAIN1">
+
+                <SECTION>
+                    <DIV style="width:80%; margin: auto; max-width:800px; text-align:center;">
+                        <H3>Guess an Idiom</H3>
+                    </DIV>
+                </SECTION>
+
+<!-- entry fields and options........................................................................................ -->
+                <SECTION>
+                    <DIV style="width:80%; margin: auto; max-width:800px; text-align:left;">
+                            <DIV>
+                                <LABEL for="action" style="width:100px">Action:</LABEL>
+                                <SELECT id="Action" STYLE="margin-left: 52px; margin-bottom:10px" name="action" onchange="fChangeListener()" onfocus="fChangeListener()">
+                                    <OPTION value="Letter" selected>Letter</OPTION>
+                                    <OPTION value="Idiom">Idiom</OPTION>
+                                    <OPTION value="Status">Status</OPTION>
+                                    <OPTION value="Reset">Reset</OPTION>
+                                    <OPTION value="Options">Options</OPTION>
+                                </SELECT>
+                            </DIV>
+                            <DIV>
+                                <LABEL id="LetterLbl" for="Letter" style="width:100px; display:inline-block">Letter (A - z):</LABEL>
+                                <INPUT id="Letter" name="Letter" type="text" size="1" maxlength="1" style="display=inline-block; margin-left:10px" required>
+                            </DIV>
+                            <DIV>
+                                <LABEL id="IdiomLbl" for="Idiom" style="display:none">Idiom (max 60):</LABEL>
+                                <INPUT id="Idiom" name="Idiom" type="text" size="60" style="display:none" maxlength="60">
+                            </DIV>
+                            <DIV style="margin-top:5px">
+                                    <BUTTON onclick="fGetResults()">Submit</BUTTON>
+                            </DIV>
+                    </DIV>
+                </SECTION>
+
+<!-- results area................................................................................................... -->
+
+            <DIV style="width:80%; margin:auto">
+                <TEXTAREA ID="ResultArea" ROWS="10" STYLE="width:100%; margin-top:10px; background-color:lightgrey" readonly>
+                </TEXTAREA>
+            </DIV>
+
+<!-- buttons to show and hide help & clear item  ................................................................... -->
+
+                <DIV id="HELP">
+                    <BUTTON onclick="fShowHelp()">Help</BUTTON>
+                    <BUTTON onclick="fClearPage()">Clear</BUTTON>
+                </DIV>
+
+<!-- help text controlled by button ................................................................................ -->
+
+            <DIV id=HELPTXT">
+                <DIV id="HELPDIV" class="help">
+                    <P>
+                        Letter: guess each letter that appears in the idiom.<BR>
+                        Idiom: guess the complete idiom.<BR>
+                        Status: show game status<BR>
+                        Reset: reset to the start with a new idiom and zero attempts.<BR>
+                        Options: set options
+                    </P>
+                </DIV>
+            </DIV>
+
+<!-- internals controlled by button ................................................................................ -->
+
+                <DIV ID="internalsDiv" style="width:80%; margin: auto; max-width:800px;">
+                    <DETAILS>
+                        <SUMMARY style="outline:none">
+                            Internals
+                        </SUMMARY>
+                        <P id="sumpara">
+                            html file: /var/www.html/guessAnIdiom.html<BR>
+                            css file: /var/www.html/css/index.css<BR>
+                            js file: /var/www.html/css/guessAnIdiom.js<BR>
+                            ajax handler: /usr/lib/cgi-bin/guessAnIdiom.cgi<BR>
+                            ajax method: get<BR>
+                            guesses file: /var/www.html/guessAnIdiomG.dat<BR>
+                            solution file: /var/www.html/guessAnIdiomS.dat<BR>
+                            candidates file: /var/www.html/guessAnIdiomC.dat<BR>
+                            target file: /var/www.html/guessAnIdiomT.dat<BR>
+                            source code: C<BR>
+                        </P>
+                    </DETAILS>
+                </DIV>
+
+            </MAIN>
+
+<!-- <ASIDE1> region for change log ................................................................................ -->
+
+            <ASIDE ID="ASIDE1">
+                    <H3 ID=ASIDE1H3>Changes 2021</H3>
+                <UL ID="ASIDE1UL">
+                    <LI CLASS="ASIDE1LI">03-Oct: read-only results area</LI>
+                    <LI CLASS="ASIDE1LI">03-Oct: light grey results area</LI>
+                    <LI CLASS="ASIDE1LI">29-Sep: unencode idiom guess</LI>
+                    <LI CLASS="ASIDE1LI">28-Sep: clear page on new action</LI>
+                    <LI CLASS="ASIDE1LI">28-Sep: change from POST to GET</LI>
+                    <LI CLASS="ASIDE1LI">19-Sep: remove HTML from results</LI>
+                    <LI CLASS="ASIDE1LI">20-Sep: non-CGI results</LI>
+                    <LI CLASS="ASIDE1LI">19-Sep: add Internals</LI>
+                    <LI CLASS="ASIDE1LI">16-Sep: moved to grid layout</LI>
+                </UL>
+            </ASIDE>
+
+<!-- <ASIDE2> region for corner image .............................................................................. -->
+
+            <ASIDE ID="ASIDE2">
+                <DIV ID="ASIDE2DIV">
+                     <IMG ID="ASIDE2IMG" SRC="cornerImage.png" ALT="Cannot Load cornerImage.png">
+                </DIV>
+            </ASIDE>
+
+<!-- <ASIDE3> region for corner image caption ...................................................................... -->
+
+            <ASIDE id="ASIDE3">
+                <DIV id="ASIDE3DIV">
+                    <P>
+                     Matilda Cook in Magpies uniform before her next netball game 2022
+                    </P>
+                </DIV>
+            </ASIDE>
+
+<!-- <FOOTER> region for page footer ............................................................................... -->
+
+            <FOOTER ID="FOOTER1">
+                <DIV ID="FOOTER1DIV">
+                    <P>&copy; 2020 www.risingfast.com ... /var/www/html/guessAnIdiom.html</P>
+                </DIV>
+            </FOOTER>
+
+        </DIV>
+    </DIV>
+
+    <SCRIPT src="guessAnIdiom.js"></SCRIPT>
+
+</BODY>
+
+</HTML>
