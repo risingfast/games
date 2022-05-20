@@ -7,35 +7,33 @@
 //    25-Sep-2021 add fFetchWords() and  fClearHTML()
 //    25-Sep-2021 add a step to clear results in fClearHTML()
 //    26-Sep-2021 remove fClear() call from fFetchWords()
-//    11-May-2022 capitalize helpDiv
-//    12-May-2022 change "none" to x.style.display
-//    19-May-2022 change idResult to results-area
-
   
 const uri1 = "http://www.risingfast.com/cgi-bin/d_regexWords.cgi";
 
 // functions for action buttons to display and hide help ..........................................
   
 function fShowHelp() {
-    var x = document.getElementById("HELPDIV");
-    if (x.style.display === "") {
+    var x = document.getElementById("helpDiv");
+    const stx = getComputedStyle(x);
+    x.style.display = stx.display;
+    if (x.style.display === "none") {
         x.style.display = "block";
     } else {
-        x.style.display = "";
+        x.style.display = "none";
     }
 }
 
 function fClearHTML() {
     document.getElementById("rl").value = "";
-    document.getElementById("wordpattern-input").value = "";
-    document.getElementById("results-area").value = "";
+    document.getElementById("wp").value = "";
+    document.getElementById("idResult").value = "";
     document.getElementById("sa").value = "Yes";
-    document.getElementById("HELPDIV").style.display = "none";
+    document.getElementById("helpDiv").style.display = "none";
 }
 
 async function fFetchWords() {
 
-    var sPattern = document.getElementById("wordpattern-input").value;
+    var sPattern = document.getElementById("wp").value;
     var sLimit = document.getElementById("rl").value;
     var sHideApos = document.getElementById("sa").value;
 
@@ -44,8 +42,8 @@ async function fFetchWords() {
 
     if (response.ok) {
         let text = await response.text();
-        document.getElementById("results-area").value= text;
+        document.getElementById("idResult").value= text;
     } else {
-        document.getElementById("results-area").value= "CGI Call Failed";
+        document.getElementById("idResult").value= "CGI Call Failed";
     }
 }

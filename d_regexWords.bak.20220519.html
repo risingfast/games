@@ -33,7 +33,6 @@
 <!--    30-Sep-2021 - update the footer text to match the filename                                                    -->
 <!--    17-Oct-2021 - update the footer text to match the filename                                                    -->
 <!--    11-May-2022 - add <ASIDE3> region for corner image caption                                                    -->
-<!--    19-May-2022 - add d_regexWords.css                                                                            -->
 <!--                                                                                                                  -->
 <!-- <BODY> region for all content including header and footer ...................................................... -->
 
@@ -61,59 +60,64 @@
         
                     <MAIN ID="MAIN1">
         
-                    <DIV id="heading-div">
+                <SECTION>
+                    <DIV style="width:80%; margin: auto; text-align:center;">
                         <H3>Crossword Puzzle Help</H3>
                         <P>
                             Fetch words matching a pattern of letters and wildcard characters (using periods)
                         </P>
                     </DIV>
+                </SECTION>
         
 <!-- form .......................................................................................................... -->
 
-                <DIV id="wordpattern-div">
-                    <LABEL id="wordpattern-label" for="wordpattern-input">Word Pattern (lowercase):</LABEL>
-                    <INPUT id="wordpattern-input" class="pattern" type="text" value="a...." name="wp" required minlength="2" size="15" pattern="[a-z\.]*">
+                <DIV style="width:80%; margin:auto">
+                    <LABEL for="wp" style="float:left">Word Pattern (lowercase):</LABEL>
+                    <INPUT class="pattern" STYLE="margin-bottom:10px; margin-left:7px" ID="wp" type="text" value="a...." name="wp" required minlength="2" size="15" pattern="[a-z\.]*">
                 </DIV>
-                <DIV id="resultlimit-div">
-                    <LABEL id="resultlimit-label" for="rl">Result Limit (1 - 100):</LABEL>
-                    <INPUT id="rl" type="number" value="23" name="rl" required min="1" max="100">
+                <DIV style="width:80%; margin:auto">
+                    <LABEL for="rl" style="float:left">Result Limit (1 - 100):</LABEL>
+                    <INPUT id="rl" type="number" STYLE="margin-bottom:10px;margin-left:30px" value="23" name="rl" required min="1" max="100">
                 </DIV>
-                <DIV id="options-div">
-                    <LABEL id="options-label" for="sa">Hide Apostrophied Words:</LABEL>
-                    <SELECT id="sa" name="sa">
+                <DIV style="width:80%; margin:auto">
+                    <LABEL for="sa" style="float:left">Hide Apostrophied Words:</LABEL>
+                    <SELECT id="sa" name="sa" style="margin-left: 3px">
                         <OPTION value="Yes">Yes</OPTION>
                         <OPTION value="No">No</OPTION>
                     </SELECT>
                 </DIV>
-                <DIV id="submit-div">
-                    <BUTTON onclick="fFetchWords()">Submit</BUTTON>
+                <DIV style="width:80%; margin:auto">
+                    <BUTTON style="margin: 5px 0px 10px 0px" onclick="fFetchWords()">Submit</BUTTON>
                 </DIV>
 
 <!-- results region ....,,,,,,,,,,,................................................................................. -->
 
-                <DIV id="results-div">
-                    <TEXTAREA id="results-area" rows="10" readonly></TEXTAREA>
+                <DIV style="width:80%; margin:auto">
+                    <TEXTAREA id="idResult" style="margin:auto;width:100%; background-color:lightgrey" rows="10" readonly></TEXTAREA>
                 </DIV>
         
 <!-- button to show and hide help .................................................................................. -->
           
-                <DIV id="MOREBTTNS">
-                    <BUTTON onclick="fShowHelp()">Help</BUTTON>
-                    <BUTTON onclick="fClearHTML()">Clear</BUTTON>
+                <DIV id="HELP">
+                    <BUTTON style="margin-top: 5px" onclick="fShowHelp()">Help</BUTTON>
+                    <BUTTON style="margin: 5px 0px 10px 0px" onclick="fClearHTML()">Clear</BUTTON>
                 </DIV>
           
 <!-- help text controlled by button ................................................................................ -->
         
-                <DIV id="HELPDIV">
-                    Word Pattern: can only be lowercase letters and periods (as wildcards) only - one for each letter in the matching word.<br>
-                    Result Limit: leave blank for no limit, otherwise specify between 1 and 100 results.<br>
-                    Hide Apostrophied Words: suppresses results with embedded apostrophes.
+                <DIV id="HELPTXT">
+                    <DIV id="HELPDIV" class="help">
+                        Word Pattern: can only be lowercase letters and periods (as wildcards) only - one for each letter in the matching word.<br>
+                        Result Limit: leave blank for no limit, otherwise specify between 1 and 100 results.<br>
+                        Hide Apostrophied Words: suppresses results with embedded apostrophes.
+                    </DIV>
                 </DIV>
         
 <!-- internals controlled by dropdown .............................................................................. -->
         
+                <BR>
                    <DIV id="INTERNALS">
-                       <DETAILS id="internals-details">
+                       <DETAILS>
                            <SUMMARY>
                                Internals
                            </SUMMARY>
@@ -138,7 +142,6 @@
             <ASIDE ID="ASIDE1">
                     <H3 ID=ASIDE1H3>Changes 2021-22</H3>
                 <UL ID="ASIDE1UL">
-                    <LI CLASS="ASIDE1LI">19-May: add d_regexWords.css</LI>
                     <LI CLASS="ASIDE1LI">11-May: add corner image caption</LI>
                     <LI CLASS="ASIDE1LI">17-Oct: fix the title</LI>
                     <LI CLASS="ASIDE1LI">03-Oct: validate HTML</LI>

@@ -37,7 +37,6 @@
 <!--    30-Sep-2021 - updae the footer text to match the filename                                                    -->
 <!--    03-Oct-2021 - validate HTML                                                                                  -->
 <!--    11-May-2022 - add <ASIDE3> grid region for corner image caption                                              -->
-<!--    19-May-2022 - add common.css                                                                                 -->
 <!--                                                                                                                 -->
 <!-- <BODY> region for all content including header and footer ..................................................... -->
 
@@ -65,75 +64,77 @@
 
             <MAIN ID="MAIN1">
 
-                <DIV id="heading-div">
-                    <H3>BattleShips</H3>
-                    <P>
-                        Play the Battleship game and sink the fleet
-                    </P>
-                </DIV>
+                <SECTION>
+                    <DIV style="width:80%; margin: auto; text-align:center;">
+                        <H3>BattleShips</H3>
+                        <P>
+                            Play the Battleship game and sink the fleet
+                        </P>
+                    </DIV>
+                </SECTION>
 
 <!-- data entry region.............................................................................................. -->
 
-                <DIV id="action-div">
-                    <LABEL id="action-label" for="action-select">Action:</LABEL>
-                    <SELECT id="action-select" name="action">
-                        <OPTION value="Shoot">Shoot</OPTION>
-                        <OPTION value="Show">Show</OPTION>
-                        <OPTION value="List">List</OPTION>
-                        <OPTION value="Reset">Reset</OPTION>
-                        <OPTION value="Options">Options</OPTION>
-                    </SELECT>
-                </DIV>
+                <DIV style="width:80%; margin: auto">
+                    <DIV style="width:100%; margin:auto">
+                        <LABEL for="action">Action:</LABEL>
+                        <SELECT id="action" name="action" style="margin-left:65px">
+                            <OPTION value="Shoot">Shoot</OPTION>
+                            <OPTION value="Show">Show</OPTION>
+                            <OPTION value="List">List</OPTION>
+                            <OPTION value="Reset">Reset</OPTION>
+                            <OPTION value="Options">Options</OPTION>
+                        </SELECT>
+                    </DIV>
+                    <DIV style="width:100%; margin:auto">
+                        <LABEL id="LatLbl" for="Lat" style="float:left; margin-top: 5px">Latitude (0 - 9):</LABEL>
+                        <INPUT id="Lat" name="Latitude" type="number" style="margin-left:15px; margin-top:5px" min="0" max="9" required>
+                    </DIV>
+                    <DIV style="width:100%; margin:auto">
+                        <LABEL id="LngLbl" for="Lng" style="float:left; margin-top: 5px">Longitude (0 - 9):</LABEL>
+                        <INPUT id="Lng" name="Longitude" type="number" style="margin-left:3px; margin-top:5px" min="0" max="9" required>
+                    </DIV>
+                    <DIV style="width:100%; margin:auto">
+                        <BUTTON id="idSubmit" style="margin:10px 0px 5px 0px" onclick="fFetchResults()">Submit</BUTTON>
+                    </DIV>
 
-                <DIV id="latitude-div">
-                    <LABEL id="latitude-label" for="latitude-input">Latitude (0 - 9):</LABEL>
-                    <INPUT id="latitude-input" name="Latitude" type="number" min="0" max="9" required>
-                </DIV>
-
-                <DIV id="longitude-div">
-                    <LABEL id="longitude-label" for="longitude-input">Longitude (0 - 9):</LABEL>
-                    <INPUT id="longitude-input" name="Longitude" type="number" required>
-                </DIV>
-                
-                <DIV id="submit-div" >
-                    <BUTTON id="idSubmit" onclick="fFetchResults()">Submit</BUTTON>
                 </DIV>
                 
 <!-- results region ................................................................................................ -->
 
-                <DIV id="results-div">
-                    <TEXTAREA readonly id="results-area" rows=15></TEXTAREA>
+                <DIV style="width:80%; margin:auto">
+                    <TEXTAREA readonly id="idResult" style="margin:auto;width:100%; background-color:lightgrey" rows=15></TEXTAREA>
                 </DIV>
 
 <!-- button to show and hide help .................................................................................. -->
 
-                <DIV id="MOREBTTNS">
-                    <BUTTON onclick="fShowHelp()">Help</BUTTON>
-                    <BUTTON onclick="fClearHTML()">Clear</BUTTON>
+                <DIV style="width:80%; margin: auto">
+                    <BUTTON style="margin-top:5px" onclick="fShowHelp()">Help</BUTTON>
+                    <BUTTON style="margin: 5px 0px 10px 0px" onclick="fClearHTML()">Clear</BUTTON>
                 </DIV>
 
 <!-- help text controlled by button ................................................................................ -->
 
-                <DIV id="HELPDIV">
-                        Choose action 'Reset' then 'Submit' to reset the game<BR>
-                        Choose action 'Shoot' and enter an X and Y coordinate then 'Submit' to fire<BR>
-                        Choose action 'Show' then 'Submit' to see the enemy fleet positions (cheating)<BR>
-                        Choose action 'List' then 'Submit' to list all shots fired in the current game<BR>
+                <DIV id="HELPTXT">
+                    <DIV id="HELPDIV" class="help">
+                            Choose action 'Reset' then 'Submit' to reset the game<BR>
+                            Choose action 'Shoot' and enter an X and Y coordinate then 'Submit' to fire<BR>
+                            Choose action 'Show' then 'Submit' to see the enemy fleet positions (cheating)<BR>
+                            Choose action 'List' then 'Submit' to list all shots fired in the current game<BR>
+                    </DIV>
                 </DIV>
 
 <!-- internals controlled by dropdown .............................................................................. -->
 
+                <BR>
                    <DIV id="INTERNALS">
-                       <DETAILS id="internals-details">
+                       <DETAILS>
                            <SUMMARY>
                                Internals
                            </SUMMARY>
                            <P>
                                html file: /var/www.html/battleShips.html<BR>
-                               css file: /var/www/html/common.css<BR>
-                               css file: /var/www/html/battleShips.css<BR>
-                               js file: /var/www/html/common.js
-                               js file: /var/www/html/battleShips.js
+                               css file: /var/www/html/css/index.css<BR>
                                cgi file: /usr/lib/cgi-bin/battleShips.cgi<BR>
                                corner image: /var/www/html/cornerImage.png<BR>
                                background image: /var/www/html/background.jpg<BR>
@@ -149,8 +150,6 @@
             <ASIDE ID="ASIDE1">
                     <H3 ID=ASIDE1H3>Changes 2021-22</H3>
                 <UL ID="ASIDE1UL">
-                    <LI CLASS="ASIDE1LI">19-May: expand clear function</LI>
-                    <LI CLASS="ASIDE1LI">18-May: add common.css</LI>
                     <LI CLASS="ASIDE1LI">26-Sep: move Clear after Help</LI>
                     <LI CLASS="ASIDE1LI">26-Sep: reformat results</LI>
                     <LI CLASS="ASIDE1LI">26-Sep: migrate output to grid</LI>
@@ -190,7 +189,6 @@
     </DIV>
 
     <SCRIPT src="battleShips.js"></SCRIPT>
-    <SCRIPT src="common.js"></SCRIPT>
 
 </BODY>
 
