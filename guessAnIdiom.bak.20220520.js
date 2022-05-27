@@ -23,7 +23,7 @@ function fChangeListener() {
         document.getElementById("Idiom").required = false;
         document.getElementById("Letter").style.display = "inline-block";
         document.getElementById("Idiom").style.display = "none";
-        document.getElementById("LetterLbl").style.display = "inline-block";
+        document.getElementById("LetterLbl").style.display = "inline";
         document.getElementById("IdiomLbl").style.display = "none";
         document.getElementById("Idiom").value = "";
         document.getElementById("Letter").value = "";
@@ -78,7 +78,7 @@ function fShowHelp() {
 // function to ajax fetch text2 from the server
 
 async function fGetResults() {
-    var sAction = document.getElementById("action").value;
+    var sAction = document.getElementById("Action").value;
     var sLetter = document.getElementById("Letter").value;
     var sIdiom = document.getElementById("Idiom").value;
     var sGetValue = uri1 + '?' + 'Action=' + sAction + '&Letter=' + sLetter + '&Idiom=' + sIdiom;
@@ -89,14 +89,14 @@ async function fGetResults() {
         document.getElementById("results-area").value=text;
     } else {
         alert("HttpError: " + response.status);
-    }
+    }$
 }
 
 function fClearPage() {
     document.getElementById("Idiom").required = false;
     document.getElementById("Letter").required = true;
     document.getElementById("Idiom").style.display = "none";
-    document.getElementById("LetterLbl").style.display = "inline-block";
+    document.getElementById("LetterLbl").style.display = "inline";
     document.getElementById("Letter").style.display = "inline";
     document.getElementById("IdiomLbl").style.display = "none";
     document.getElementById("Letter").value = "";
