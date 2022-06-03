@@ -11,7 +11,6 @@
 //     27-Sep-2021 show lat and long entry in clearHTML()
 //     12-Mar-2022 change "none" to "" for x.style.display
 //     19-May-2022 add ClearExtras()
-//     01-Jun-2022 add cornerimage rotation()
 
 // Enhancements:
 
@@ -20,7 +19,7 @@
 document.getElementById("action-select").onchange = fChangeListener;
 
 const uri1 = "http://www.risingfast.com/cgi-bin/battleShips.cgi";
-const uri2 = "http://www.risingfast.com/cgi-bin/setCornerImage.cgi";
+
 
 function fChangeListener() {
     var LatChoice = document.getElementById("latitude-input").required;
@@ -99,21 +98,3 @@ async function fFetchResults() {
         document.getElementById("idResult").value= "CGI Call Failed";
     }
 }
-
-// function to ajax fetch the current corner image and captiona
-
-async function fSetCornerImage() {
-    let response = await fetch(uri2);
-    if (response.ok) {
-        let text = await response.text();
-        let array = text.split("\n");
-        array.pop();                      // remove the last element (empty element) created by the split("\n")
-        let intRecords = array.length/3;
-        let intRecordSelected = Math.trunc(Math.random() * intRecords);
-        document.getElementById("ASIDE2IMG").src=array[intRecordSelected * 3]
-        document.getElementById("ASIDE3-PARA").innerHTML=array[(intRecordSelected * 3) + 1];
-    } else {
-        alert("HttpError: " + response.status);
-    }
-}
-

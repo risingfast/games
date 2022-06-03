@@ -1,0 +1,86 @@
+/* guessAnIdiom.css - a css template for guessAnIdiom.html                                                           */
+/* started - 19-May-2022                                                                                             */
+/* References:                                                                                                       */
+/*         HTML & CSS for Beginners Part 22: How to create a basic layout - the CSS                                  */
+/* Log                                                                                                               */
+/*     19-May-2022 - started                                                                                         */
+
+#heading-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 800px;
+    text-align: center;
+}
+
+#input-div {
+    width: 80%;
+    margin: auto;
+    max-width: 800px; 
+    text-align: left;
+}
+
+#fgetresults-div {
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#results-div {
+    width: 80%;
+    margin: auto; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 800px;
+}
+
+#results-area {
+    margin: auto;
+    width: 80%;
+    background-color: lightgrey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#action-div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#letter-div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#action-label {
+    width: 100px;
+    display: inline-block;
+}a
+
+#action {
+    margin-left: 52px;
+    margin-bottom: 10px;
+}
+
+#LetterLbl {
+    width: 100px;
+    display: inline-block;
+}
+
+#letter {
+    display: inline-block;
+    margin-left: 10px;
+}a
+
+#idiomLbl {
+    display: none;
+}
+
+#idiom {
+    display: none;
+}
+
+

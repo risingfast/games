@@ -1,0 +1,79 @@
+/* template.css - a css template                                                                                     */
+/* started - 17-May-2022                                                                                             */
+/* References:                                                                                                       */
+/*         HTML & CSS for Beginners Part 22: How to create a basic layout - the CSS                                  */
+/* Log                                                                                                               */
+/*     17-May-2022 - started                                                                                         */
+
+#heading-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+    text-align: center;
+}
+
+#action-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#action-label {
+    width: 120px;
+    display: inline-block;
+}
+
+#latitude-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#latitude-label {
+    width: 120px;
+    display: inline-block;
+}
+
+#longitude-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#longitude-label {
+    width: 120px;
+    display: inline-block;
+}
+
+#submit-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#results-div {
+    width: 80%;
+    margin: auto; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+}
+
+#results-area {
+    width: 100%;
+    background-color: lightgrey;
+}

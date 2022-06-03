@@ -10,11 +10,10 @@
 //    03-Oct-2021 rename functions and add a Clear() function
 //    12-May-2022 change "none" to "" for x.style.display
 //    19-May-2022 change ResultArea to results-area
-//    19-May-2022 add fSetCornerImage();
 //
+// const uri1 = "http://www.risingfast.com/cgi-bin/d_AjaxFetch1.cgi";
 
 const uri1 = "http://www.risingfast.com/cgi-bin/guessAnIdiom.cgi";
-const uri2 = "http://www.risingfast.com/cgi-bin/setCornerImage.cgi";
 
 // function to set document model values to match action chosen by the user .............................................
 
@@ -105,22 +104,3 @@ function fClearPage() {
     document.getElementById("results-area").value = ""
     document.getElementById("HELPDIV").style.display = "none"
 }
-
-// function to ajax fetch the current corner image and captiona
-
-async function fSetCornerImage() {
-    let response = await fetch(uri2);
-    if (response.ok) {
-        let text = await response.text();
-        let array = text.split("\n");
-        array.pop();                      // remove the last element (empty element) created by the split("\n")
-        let intRecords = array.length/3;
-        let intRecordSelected = Math.trunc(Math.random() * intRecords);
-        document.getElementById("ASIDE2IMG").src=array[intRecordSelected * 3]
-        document.getElementById("ASIDE3-PARA").innerHTML=array[(intRecordSelected * 3) + 1];
-    } else {
-        alert("HttpError: " + response.status);
-    }
-}
-
-
