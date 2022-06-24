@@ -40,7 +40,7 @@
 <!--                                                                                                                 -->
 <!-- <body> region for all content including header and footer ..................................................... -->
 
-<body onload="fClearPage(); fSetCornerImage()">
+<body onload="fClearPage(); fcSetCornerImage()">
     <div id="WRAPPER1">
         <div id="WRAPPER2">
             <header id="HEADER1">
@@ -102,7 +102,7 @@
 <!-- buttons to show and hide help & clear item  ................................................................... -->
 
                 <div id="MOREBTTNS">
-                    <button onclick="fShowHelp()">Help</button>
+                    <button onclick="fcShowHelp()">Help</button>
                     <button onclick="fClearPage()">Clear</button>
                 </div>
 
@@ -192,6 +192,7 @@
         </div>
     </div>
 
+    <script src="common.js"></script>
     <script src="guessAnIdiom.js"></script>
 
 </body>
