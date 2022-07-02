@@ -37,10 +37,11 @@
 <!--    11-May-2022 - add <ASIDE3> caption region for corner image                                                   -->
 <!--    23-May-2022 - lowercase html tags                                                                            -->
 <!--    31-May-2022 - add cornerimage rotation                                                                       -->
+<!--    26-Jun-2022 - set corner image behaviour                                                                     -->
 <!--                                                                                                                 -->
 <!-- <body> region for all content including header and footer ..................................................... -->
 
-<body onload="fClearPage(); fcSetCornerImage()">
+<body onload="fClearPage(); fcSetCornerImage(), fcSetFooterOptions()">
     <div id="WRAPPER1">
         <div id="WRAPPER2">
             <header id="HEADER1">
@@ -56,6 +57,7 @@
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/d_template.html">Template</a></li>
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/email.html">Email</a></li>
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/about.html">About</a></li>
+                    <li class="NAV1LI"><a HREF="http://www.risingfast.com/options.html">Options</a></li>
                 </ul>
             </nav>
 
@@ -149,6 +151,7 @@
             <aside id="ASIDE1">
                     <h3 id=ASIDE1H3>Changes 2021-22</h3>
                 <ul id="ASIDE1UL">
+                    <li class="ASIDE1LI">26-Jun: set corner image behaviour</li>
                     <li class="ASIDE1LI">31-May: add cornerimage rotation</li>
                     <li class="ASIDE1LI">23-May: lowercase html tags</li>
                     <li class="ASIDE1LI">03-Oct: read-only results area</li>
@@ -184,6 +187,12 @@
 <!-- <FOOTER> region for page footer ............................................................................... -->
 
             <footer id="FOOTER1">
+                <div id="FOOTER1OPTIONS-DIV">
+                    Corner Image Behaviour: <label id="footeroptionscichoice"></label>;
+                    Background Image: <label id="footeroptionsbackgroundimage"></label>;
+                    Show Current User: <label id="footeroptionsshowuser"></label>;
+                    Show Access Log: <label id="footeroptionsshowlog"></label>
+                </div>
                 <div id="FOOTER1DIV">
                     <p>&copy; 2020 www.risingfast.com ... /var/www/html/guessAnIdiom.html</P>
                 </div>
