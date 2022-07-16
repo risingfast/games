@@ -12,6 +12,7 @@
 //     12-Mar-2022 change "none" to "" for x.style.display
 //     19-May-2022 add ClearExtras()
 //     01-Jun-2022 add cornerimage rotation()
+//     18-Jun-2022 move fSetCornerImage() to common.js
 
 // Enhancements:
 
@@ -20,7 +21,6 @@
 document.getElementById("action-select").onchange = fChangeListener;
 
 const uri1 = "http://www.risingfast.com/cgi-bin/battleShips.cgi";
-const uri2 = "http://www.risingfast.com/cgi-bin/setCornerImage.cgi";
 
 function fChangeListener() {
     var LatChoice = document.getElementById("latitude-input").required;
@@ -52,17 +52,6 @@ function fChangeListener() {
     }
 }
 
-// functions for action buttons to display and hide help ...............................................................
-  
-function fShowHelp() {
-    var x = document.getElementById("HELPDIV");
-    if (x.style.display === "") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "";
-    }
-}
-
 // function to clear page if 'Clear' button is pressed ..................................................................
 
 function fClearHTML() {
@@ -78,7 +67,7 @@ function fClearHTML() {
     document.getElementById("latitude-label").style.display  = "inline-block";
     document.getElementById("longitude-label").style.display  = "inline-block";
 
-    fClearExtras();
+    fcClearExtras();
 }
 
 // function to fetch results from a shoot or other action ...............................................................
@@ -99,21 +88,3 @@ async function fFetchResults() {
         document.getElementById("idResult").value= "CGI Call Failed";
     }
 }
-
-// function to ajax fetch the current corner image and captiona
-
-async function fSetCornerImage() {
-    let response = await fetch(uri2);
-    if (response.ok) {
-        let text = await response.text();
-        let array = text.split("\n");
-        array.pop();                      // remove the last element (empty element) created by the split("\n")
-        let intRecords = array.length/3;
-        let intRecordSelected = Math.trunc(Math.random() * intRecords);
-        document.getElementById("ASIDE2IMG").src=array[intRecordSelected * 3]
-        document.getElementById("ASIDE3-PARA").innerHTML=array[(intRecordSelected * 3) + 1];
-    } else {
-        alert("HttpError: " + response.status);
-    }
-}
-
