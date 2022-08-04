@@ -41,10 +41,11 @@
 <!--    23-May-2022 - lowercase html tags                                                                            -->
 <!--    01-Jun-2022 - add cornerimage rotation                                                                       -->
 <!--    26-Jun-2022 - finalize corner image behaviour                                                                -->
+<!--    22-Jul-2022 - add session div, secured div and authentication link                                           -->
 <!--                                                                                                                 -->
 <!-- <body> region for all content including header and footer ..................................................... -->
 
-<body onload="fcSetCornerImage(), fcSetFooterOptions()">
+<body onload="fcSetCornerImage(), fcSetFooterOptions(), fcCheckAuthentication()">
     <div id="WRAPPER1">
         <div id="WRAPPER2">
             <header id="HEADER1">
@@ -62,8 +63,17 @@
                     <li class="NAV1LI"><a href="http://www.risingfast.com/email.html">Email</a></li>
                     <li class="NAV1LI"><a href="http://www.risingfast.com/about.html">About</a></li>
                     <li class="NAV1LI"><a href="http://www.risingfast.com/options.html">Options</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/authenticateUser.html">Authenticate</a></li>
                 </ul>
             </nav>
+
+<!-- <SESSION1> region for session information .................................................................... -->
+
+            <aside id="SESSION1">
+                    <h3 id=SESSION1H3>Current Session</h3>
+                    <p id="SESSION1PARA">
+                    </p>
+            </aside>
 
 <!-- <MAIN> region for main content and background image ........................................................... -->
 
@@ -78,35 +88,41 @@
 
 <!-- data entry region.............................................................................................. -->
 
-                <div id="action-div">
-                    <label id="action-label" for="action-select">Action:</label>
-                    <select id="action-select" name="action">
-                        <option value="Shoot">Shoot</option>
-                        <option value="Show">Show</option>
-                        <option value="List">List</option>
-                        <option value="Reset">Reset</option>
-                        <option value="Options">Options</option>
-                    </select>
+                <div id="unsecured-div">
+                    <p>Authentication is required for this page (via: Home >> Utilities >> Authenticate)</p>
                 </div>
 
-                <div id="latitude-div">
-                    <label id="latitude-label" for="latitude-input">Latitude (0 - 9):</label>
-                    <input id="latitude-input" name="Latitude" type="number" min="0" max="9" required>
-                </div>
+                <div id="secured-div">
+                    <div id="action-div">
+                        <label id="action-label" for="action-select">Action:</label>
+                        <select id="action-select" name="action">
+                            <option value="Shoot">Shoot</option>
+                            <option value="Show">Show</option>
+                            <option value="List">List</option>
+                            <option value="Reset">Reset</option>
+                            <option value="Options">Options</option>
+                        </select>
+                    </div>
 
-                <div id="longitude-div">
-                    <label id="longitude-label" for="longitude-input">Longitude (0 - 9):</label>
-                    <input id="longitude-input" name="Longitude" min="0" max="9" type="number" required>
-                </div>
-                
-                <div id="submit-div" >
-                    <button id="idSubmit" onclick="fFetchResults()">Submit</button>
-                </div>
+                    <div id="latitude-div">
+                        <label id="latitude-label" for="latitude-input">Latitude (0 - 9):</label>
+                        <input id="latitude-input" name="Latitude" type="number" min="0" max="9" required>
+                    </div>
+
+                    <div id="longitude-div">
+                        <label id="longitude-label" for="longitude-input">Longitude (0 - 9):</label>
+                        <input id="longitude-input" name="Longitude" min="0" max="9" type="number" required>
+                    </div>
+
+                    <div id="submit-div" >
+                        <button id="idSubmit" onclick="fFetchResults()">Submit</button>
+                    </div>
                 
 <!-- results region ................................................................................................ -->
 
-                <div id="results-div">
-                    <textarea readonly id="results-area" rows=15></textarea>
+                    <div id="results-div">
+                        <textarea readonly id="results-area" rows=15></textarea>
+                    </div>
                 </div>
 
 <!-- button to show and hide help .................................................................................. -->
@@ -153,6 +169,8 @@
             <aside id="ASIDE1">
                     <h3 id=ASIDE1H3>Changes 2021-22</h3>
                 <ul id="ASIDE1UL">
+                    <li class="ASIDE1LI">22-Jul: add authenticate link</li>
+                    <li class="ASIDE1LI">22-Jul: show session block</li>
                     <li class="ASIDE1LI">26-Jun: add footer options</li>
                     <li class="ASIDE1LI">01-Jun: add cornerimage rotation</li>
                     <li class="ASIDE1LI">23-May: lowercase html tags</li>

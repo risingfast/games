@@ -37,10 +37,11 @@
 <!--    23-May-2022 - lowercase html tags                                                                             -->
 <!--    01-Jun-2022 - add cornerimage rotation                                                                        -->
 <!--    27-Jun-2022 - set footer options                                                                              -->
+<!--    22-Jul-2022 - add session div, secured div and authentication link                           i                -->
 <!--                                                                                                                  -->
 <!-- <body> region for all content including header and footer ...................................................... -->
 
-<body onload="fcSetCornerImage(), fcSetFooterOptions()">
+<body onload="fcSetCornerImage(), fcSetFooterOptions(), fcCheckAuthentication()">
     <div id="WRAPPER1">
         <div id="WRAPPER2">
             <header id="HEADER1">
@@ -58,8 +59,17 @@
                     <li class="NAV1LI"><a href="http://www.risingfast.com/email.html">Email</a></li>
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/about.html">About</a></li>
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/options.html">Options</a></li>
-                        </ul>
-                    </nav>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/authenticateUser.html">Authenticate</a></li>
+                </ul>
+            </nav>
+
+<!-- <SESSION1> region for session information .................................................................... -->
+
+            <aside id="SESSION1">
+                    <h3 id=SESSION1H3>Current Session</h3>
+                    <p id="SESSION1PARA">
+                    </p>
+            </aside>
 
 <!-- <main> region for main content and background image ........................................................... -->
 
@@ -74,29 +84,35 @@
 
 <!-- form .......................................................................................................... -->
 
-                <div id="wordpattern-div">
-                    <label id="wordpattern-label" for="wordpattern-input">Word Pattern (lowercase):</label>
-                    <input id="wordpattern-input" class="pattern" type="text" value="a...." name="wp" required minlength="2" size="15" pattern="[a-z\.]*">
+                <div id="unsecured-div">
+                    <p>Authentication is required for this page (via: Home >> Utilities >> Authenticate)</p>
                 </div>
-                <div id="resultlimit-div">
-                    <label id="resultlimit-label" for="rl">Result Limit (1 - 100):</label>
-                    <input id="rl" type="number" value="23" name="rl" required min="1" max="100">
-                </div>
-                <div id="options-div">
-                    <label id="options-label" for="sa">Hide Apostrophied Words:</label>
-                    <select id="sa" name="sa">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div id="submit-div">
-                    <button onclick="fFetchWords()">Submit</button>
-                </div>
+
+                <div id="secured-div">
+                    <div id="wordpattern-div">
+                        <label id="wordpattern-label" for="wordpattern-input">Word Pattern (lowercase):</label>
+                        <input id="wordpattern-input" class="pattern" type="text" value="a...." name="wp" required minlength="2" size="15" pattern="[a-z\.]*">
+                    </div>
+                    <div id="resultlimit-div">
+                        <label id="resultlimit-label" for="rl">Result Limit (1 - 100):</label>
+                        <input id="rl" type="number" value="23" name="rl" required min="1" max="100">
+                    </div>
+                    <div id="options-div">
+                        <label id="options-label" for="sa">Hide Apostrophied Words:</label>
+                        <select id="sa" name="sa">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div id="submit-div">
+                        <button onclick="fFetchWords()">Submit</button>
+                    </div>
 
 <!-- results region ....,,,,,,,,,,,................................................................................. -->
 
-                <div id="results-div">
-                    <textarea id="results-area" rows="10" readonly></textarea>
+                    <div id="results-div">
+                        <textarea id="results-area" rows="10" readonly></textarea>
+                    </div>
                 </div>
         
 <!-- button to show and hide help .................................................................................. -->
@@ -145,6 +161,8 @@
             <aside id="ASIDE1">
                     <h3 id=ASIDE1H3>Changes 2021-22</h3>
                 <ul id="ASIDE1UL">
+                    <li class="ASIDE1LI">22-Jul: add authenticate link</li>
+                    <li class="ASIDE1LI">22-Jul: show session block</li>
                     <li CLASS="ASIDE1LI">26-Jun: set footer options</li>
                     <li CLASS="ASIDE1LI">01-Jun: set cornerimage rotation</li>
                     <li CLASS="ASIDE1LI">23-May: lowercase html tags</li>

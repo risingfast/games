@@ -38,10 +38,11 @@
 <!--    23-May-2022 - lowercase html tags                                                                            -->
 <!--    31-May-2022 - add cornerimage rotation                                                                       -->
 <!--    26-Jun-2022 - set corner image behaviour                                                                     -->
+<!--    22-Jul-2022 - add session div, secured div and authentication link                                           -->
 <!--                                                                                                                 -->
 <!-- <body> region for all content including header and footer ..................................................... -->
 
-<body onload="fClearPage(); fcSetCornerImage(), fcSetFooterOptions()">
+<body onload="fClearPage(); fcSetCornerImage(), fcSetFooterOptions(), fcCheckAuthorization()">
     <div id="WRAPPER1">
         <div id="WRAPPER2">
             <header id="HEADER1">
@@ -58,8 +59,17 @@
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/email.html">Email</a></li>
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/about.html">About</a></li>
                     <li class="NAV1LI"><a HREF="http://www.risingfast.com/options.html">Options</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/authenticateUser.html">Authenticate</a></li>
                 </ul>
             </nav>
+
+<!-- <SESSION1> region for session information .................................................................... -->
+
+            <aside id="SESSION1">
+                    <h3 id=SESSION1H3>Current Session</h3>
+                    <p id="SESSION1PARA">
+                    </p>
+            </aside>
 
 <!-- <MAIN> region for main content and background image ........................................................... -->
 
@@ -70,36 +80,43 @@
                 </div>
 
 <!-- entry fields and options........................................................................................ -->
-                <div id="input-div">
-                        <div id="action-div">
-                            <label id="action-label" for="action">Action:</label>
-                            <select id="action" name="action" onchange="fChangeListener()" onfocus="fChangeListener()">
-                                <option value="Letter" selected>Letter</option>
-                                <option value="Idiom">Idiom</option>
-                                <option value="Status">Status</option>
-                                <option value="Reset">Reset</option>
-                                <option value="Options">Options</option>
-                            </select>
-                        </div>
-                        <div id="letter-div">
-                            <label id="LetterLbl" for="Letter">Letter (A - z):</label>
-                            <input id="Letter" name="Letter" type="text" size="1" maxlength="1" required>
-                        </div>
-                        <div>
-                            <label id="IdiomLbl" for="Idiom">Idiom (max 60):</label>
-                            <input id="Idiom" name="Idiom" type="text" size="60" maxlength="60">
-                        </div>
-                        <div id="fgetresults-div">
-                                <button onclick="fGetResults()">Submit</button>
-                        </div>
+
+                <div id="unsecured-div">
+                    <p>Authentication is required for this page (via: Home >> Utilities >> Authenticate)</p>
                 </div>
+
+                <div id="secured-div">
+                    <div id="input-div">
+                        <div id="action-div">
+                                <label id="action-label" for="action">Action:</label>
+                                <select id="action" name="action" onchange="fChangeListener()" onfocus="fChangeListener()">
+                                    <option value="Letter" selected>Letter</option>
+                                    <option value="Idiom">Idiom</option>
+                                    <option value="Status">Status</option>
+                                    <option value="Reset">Reset</option>
+                                    <option value="Options">Options</option>
+                                </select>
+                            </div>
+                            <div id="letter-div">
+                                <label id="LetterLbl" for="Letter">Letter (A - z):</label>
+                                <input id="Letter" name="Letter" type="text" size="1" maxlength="1" required>
+                            </div>
+                            <div>
+                                <label id="IdiomLbl" for="Idiom">Idiom (max 60):</label>
+                                <input id="Idiom" name="Idiom" type="text" size="60" maxlength="60">
+                            </div>
+                            <div id="fgetresults-div">
+                                    <button onclick="fGetResults()">Submit</button>
+                            </div>
+                    </div>
 
 <!-- results area................................................................................................... -->
 
-            <div id="results-div">
-                <textarea id="results-area" rows="10" readonly>
-                </textarea>
-            </div>
+                    <div id="results-div">
+                        <textarea id="results-area" rows="10" readonly>
+                        </textarea>
+                    </div>
+                </div>
 
 <!-- buttons to show and hide help & clear item  ................................................................... -->
 
@@ -151,6 +168,8 @@
             <aside id="ASIDE1">
                     <h3 id=ASIDE1H3>Changes 2021-22</h3>
                 <ul id="ASIDE1UL">
+                    <li class="ASIDE1LI">22-Jul: add authenticate link</li>
+                    <li class="ASIDE1LI">22-Jul: show session block</li>
                     <li class="ASIDE1LI">26-Jun: set corner image behaviour</li>
                     <li class="ASIDE1LI">31-May: add cornerimage rotation</li>
                     <li class="ASIDE1LI">23-May: lowercase html tags</li>
