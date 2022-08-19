@@ -20,7 +20,7 @@
 
 <!-- Comments region ................................................................................................ -->
 
-<!-- d_regexWords.html -  grid versin of html page for submitting d_regexWords.cgi                                    -->
+<!-- d_regexWords.html -  grid version of html page for submitting d_regexWords.cgi                                   -->
 <!-- References:                                                                                                      -->
 <!--      https://www.youtube.com/watch?v=qTGbWfEEnKI                                                                 -->
 <!--          Easily Structure your Layout with CSS Grid's 'grid-template-areas'                                      -->
@@ -37,7 +37,9 @@
 <!--    23-May-2022 - lowercase html tags                                                                             -->
 <!--    01-Jun-2022 - add cornerimage rotation                                                                        -->
 <!--    27-Jun-2022 - set footer options                                                                              -->
-<!--    22-Jul-2022 - add session div, secured div and authentication link                           i                -->
+<!--    22-Jul-2022 - add session div, secured div and authentication link                          i                 -->
+<!--    25-Jul-2022 - add authentication anchor                                                                       -->
+<!--    15-Aug-2022 - add long links                                                                                 -->
 <!--                                                                                                                  -->
 <!-- <body> region for all content including header and footer ...................................................... -->
 
@@ -54,13 +56,37 @@
                     <h3 id="NAV1H3">Links</h3>
                 <ul id="NAV1UL">
                     <li class="NAV1LI"><a class="active" href="http://www.risingfast.com">Home</a></li>
-                    <li class="NAV1LI"><a href="http://www.risingfast.com/d_ajaxFetch.html">Latest</a></li>
-                    <li class="NAV1LI"><a href="http://www.risingfast.com/d_template.html">Template</a></li>
-                    <li class="NAV1LI"><a href="http://www.risingfast.com/email.html">Email</a></li>
-                    <li class="NAV1LI"><a HREF="http://www.risingfast.com/about.html">About</a></li>
-                    <li class="NAV1LI"><a HREF="http://www.risingfast.com/options.html">Options</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/mcaListPeople.html">Ancestry</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/bookInquiry.html">Library</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/cheatsheets.html">Cheatsheets</a></li>
                     <li class="NAV1LI"><a href="http://www.risingfast.com/authenticateUser.html">Authenticate</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/options.html">Options</a></li>
                 </ul>
+                <ul id="NAV1UL2" hidden>
+                    <li class="NAV1LI"><a class="active" href="http://www.risingfast.com">Home</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/mcaListPeople.html">Ancestry</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/bookInquiry.html">Library</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/cheatsheets.html">Cheatsheets</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/guessAnIdiom.html">Guess an Idiom</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/battleShips.html">Battleships</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/d_regexWords.html">Crossword Helper</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/environment.html">Environment</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/serverProfile.html">Server Profile</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/authenticateUser.html">Authenticate</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/options.html">Options</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/about.html">About</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/simplest.html">Text Fetcher</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/helloWorld.html">Hello World!</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/tcount.html">Counter</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/multiply.html">Multiplier</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/collectText.html">Collect Text</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/d_ajaxFetch.html">Ajax Fetch</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/d_ajaxPost.html">Post Text to Server</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/d_template.html">Template</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/dogAPI.html">Dog API</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/email.html">Email</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/perlTest.html">Cookies</a></li>
+                    <li class="NAV1LI"><a href="http://www.risingfast.com/DOM_Drills.html">DOM Drills</a></li>
             </nav>
 
 <!-- <SESSION1> region for session information .................................................................... -->
@@ -85,7 +111,7 @@
 <!-- form .......................................................................................................... -->
 
                 <div id="unsecured-div">
-                    <p>Authentication is required for this page (via: Home >> Utilities >> Authenticate)</p>
+                    <p><a href="http://www.risingfast.com/authenticateUser.html">Authentication</a> is required for this page (or via: Links >> Authenticate)</p>
                 </div>
 
                 <div id="secured-div">
@@ -161,6 +187,8 @@
             <aside id="ASIDE1">
                     <h3 id=ASIDE1H3>Changes 2021-22</h3>
                 <ul id="ASIDE1UL">
+                    <li class="ASIDE1LI">15-Aug: add long links</li>
+                    <li class="ASIDE1LI">25-Jul: add authentication anchor</li>
                     <li class="ASIDE1LI">22-Jul: add authenticate link</li>
                     <li class="ASIDE1LI">22-Jul: show session block</li>
                     <li CLASS="ASIDE1LI">26-Jun: set footer options</li>
@@ -202,7 +230,8 @@
                     Corner Image Behaviour: <label id="footeroptionscichoice"></label>;
                     Background Image: <label id="footeroptionsbackgroundimage"></label>;
                     Show Current User: <label id="footeroptionsshowuser"></label>;
-                    Show Access Log: <label id="footeroptionsshowlog"></label>
+                    Show Access Log: <label id="footeroptionsshowlog"></label>;
+                    Left Links: <label id="footeroptionsleftlinks"></label>
                 </div>
                 <div id="FOOTER1DIV">
                     <p>&copy; 2020 www.risingfast.com ... /var/www/html/d_regexWords.html</p>
