@@ -38,6 +38,7 @@
 //       04-Jan-2021 webcode
 //       27-Mar-2021 reviewed all 
 //       26-Sep-2021 remove HTML and print results in new grid layout
+//       15-Sep-2022 add Access-Control-Allow-Origin: * CORS http header
 //  Enhancements:
 //       Handle null value in number of returned results
 //
@@ -172,9 +173,10 @@ int main(void) {
             sGetToken = strtok(NULL, cyWebDelim);
         }
 
-// print the html page content type and <head> block
+// print the html page content type header and CORS header block
 
-        printf("Content-type: text/html\n\n");
+        printf("Content-type: text/html\n");
+        printf("Access-Control-Allow-Origin: *\n\n");
 
         fFindWords();
 

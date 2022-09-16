@@ -36,6 +36,7 @@
 //      27-Mar-2021 reviewed all
 //      28-Sep-2021 removed HTML output for grid formatting
 //      28-Sep-2021 changed from POST to GET string handling
+//      15-Sep-2022 add Access-Control-Allow-Origin: * CORS http header
 //  Enhancements
 //      Create a file to remember sentence guesses and provide a count
 //      Use the get_string() function to read the full sentence guess in the console
@@ -367,9 +368,10 @@ int main(void) {
             intRespValWeb = 0;
         }
 
-// print the HTML content type and header (web)
+// print the HTML content type http header and CORS http header
 
-        printf("Content-type: text/html\n\n");
+        printf("Content-type: text/html\n");
+        printf("Access-Control-Allow-Origin: *\n\n");
 
 // option 1 Letter handler (web)
 
