@@ -1,0 +1,64 @@
+/* rRoulette.css - css for json4Ajax                                                                                 */
+/* author - Geoff Jarman                                                                                             */
+/* started - 02-Nov-2022                                                                                             */
+/* References:                                                                                                       */
+/*         HTML & CSS for Beginners Part 22: How to create a basic layout - the CSS                                  */
+/* Log                                                                                                               */
+/*     02-Nov-2022 - started                                                                                         */
+
+#heading-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 800px;
+    text-align: center;
+}
+
+#section1-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#message-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#message-label {
+    width: 15%;
+}
+
+#message-input {
+    font-family: calibri;
+    font-size: 15px;
+    display: inline-block;
+    width: 85%
+}
+
+#results-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 800px;
+}
+
+#resultsText-div {
+    width: 80%;
+    margin: auto;
+    max-width: 800px;
+}
+
+#results-area {
+    width: 100%;
+}
+

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<!-- <HEAD> region for meta tags ................................................................................... -->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Russian Roulette">
+    <meta name="keywords" content="html, css, cgi">
+    <meta name="generator" content="vim">
+    <meta name="author" content="gjarman2020">
+    <link rel="stylesheet" type="text/css" href="rRoulette.css">
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <title>Russian Roulette</title>
+    <link rel="shortcut icon" href="letterRF.png" type="image/png">
+</head>
+
+<!-- Comments region ............................................................................................... -->
+<!--                                                                                                                 -->
+<!-- rRoulette.html -  a game of Russian Roulette implemented with cgi and mysql                                     -->
+<!-- References:                                                                                                     -->
+<!--      https://www.youtube.com/watch?v=qTGbWfEEnKI                                                                -->
+<!--          Easily Structure your Layout with CSS Grid's 'grid-template-areas'                                     -->
+<!-- Templates:                                                                                                      -->
+<!--      none                                                                                                       -->
+<!-- Log:                                                                                                            -->
+<!--    02-Nov-2022 start                                                                                            -->
+<!--                                                                                                                 -->
+<!-- <BODY> region for all content including header and footer ..................................................... -->
+
+<body onload="fcSetCornerImage(), fcSetFooterOptions(), fcCheckAuthentication()">
+    <div id="WRAPPER1">
+        <div id="WRAPPER2">
+            <header id="HEADER1">
+                <br>
+                <div id="HEADER1DIV">
+                     <h2>gjarman2020.com</h2>
+                </div>
+            </header>
+            <nav id="NAV1">
+                    <h3 id="NAV1H3">Links</h3>
+                <ul ID="NAV1UL">
+                    <li class="NAV1LI"><a class="active" href="http://gjarman2020.com">Home</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/mcaListPeople.html">Ancestry</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/bookInquiry.html">Library</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/cheatsheets.html">Cheatsheets</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/authenticateUser.html">Authenticate</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/options.html">Options</a></li>
+                </ul>
+                <ul id="NAV1UL2" hidden>
+                    <li class="NAV1LI"><a class="active" href="http://gjarman2020.com">Home</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/mcaListPeople.html">Ancestry</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/bookInquiry.html">Library</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/cheatsheets.html">Cheatsheets</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/guessAnIdiom.html">Guess an Idiom</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/battleShips.html">Battleships</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/d_regexWords.html">Crossword Helper</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/environment.html">Environment</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/serverProfile.html">Server Profile</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/authenticateUser.html">Authenticate</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/options.html">Options</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/about.html">About</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/simplest.html">Text Fetcher</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/helloWorld.html">Hello World!</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/tcount.html">Counter</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/multiply.html">Multiplier</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/collectText.html">Collect Text</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/d_ajaxFetch.html">Ajax Fetch</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/d_ajaxPost.html">Post Text to Server</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/d_template.html">Template</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/dogAPI.html">Dog API</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/email.html">Email</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/perlTest.html">Cookies</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/DOM_Drills.html">DOM Drills</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/json4Ajax.html">JSON for Ajax</a></li>
+                    <li class="NAV1LI"><a href="http://gjarman2020.com/rRoulette.html">Russian Roulette</a></li>
+                </ul>
+            </nav>
+
+<!-- <SESSION1> region for session information .................................................................... -->
+
+            <aside id="SESSION1">
+                    <h3 id=SESSION1H3>Current Session</h3>
+                    <p id="SESSION1PARA">
+                    </p>
+            </aside>
+
+<!-- <MAIN> region for main content and background image ........................................................... -->
+
+            <main id="MAIN1">
+
+                <div style="width:80%; margin: auto; max-width:800px; text-align:center;">
+                    <h2>Russian Roulette</h2>
+                    <p>A game of Russian Roulette</p>
+                </div>
+
+                <div id="unsecured-div">
+                    <p><a href="http://gjarman2020.com/authenticateUser.html">Authentication</a> is required for this page (or via: Links >> Authenticate)</p>
+                </div>
+
+                <div id="secured-div">
+                    <div id="results-div">
+                        <h3>Action:</H3>
+                        <label id=action-label" for="action-select">Action:</label>
+                        <select id="Action-select" name="Action" onchange="fEnableDisablePlayButton()";>
+                            <option value="Choose" selected>Choose</option>
+                            <option value="Clear">Clear</option>
+                            <option value="Load">Load</option>
+                            <option value="Spin">Spin</option>
+                            <option value="Pull">Pull</option>
+                            <option value="Look">Look</option>
+                        </select>
+                        <button id="play-button" disabled="disabled" onclick="fFetchJSON()">Fetch JSON</button>
+                    </div>
+                    <div id="resultsText-div">
+                        <textarea id="results-area" rows="15"></textarea>
+                    </div>
+                    <div id="message-div">
+                        <label id="message-label">Messages</label>
+                        <input id="message-input">
+                    </div>
+                </div>
+
+<!-- buttons to show and hide help ................................................................................. -->
+
+                <div id="MOREBTTNS">
+                    <button onclick="fcShowHelp()">Help</button>
+                    <button onclick="fClearTemplateFields()">Clear</button>
+                    <br>
+                </div>
+
+<!-- help text controlled by button ................................................................................ -->
+
+                <div id="HELPDIV">
+                    <p>
+                    Choose an action (anything other than 'Choose') then click 'Play'<br>
+                    </p>
+                </div>
+
+<!-- internals text ................................................................................................ -->
+
+               <div id="INTERNALS">
+                    <details id="internals-details">
+                        <summary>
+                            Internals
+                        </summary>
+                        <p>
+                            html file: /var/www.html/rRoulette.html<br>
+                            css file: /var/www/html/rRoulette.css<br>
+                            js file: /var/www/html/rRoulette.js<br>
+                            js file: /var/www/html/common.js<br>
+                            cgi directory: /usr/lib/cgi-bin/<br>
+                            cgi file: /usr/lib/cgi-bin/rRoulette.cgi<br>
+                            corner image: /var/www/html/cornerImage.png<br>
+                            background image: /var/www/html/background.jpg<br>
+                            CGI source code: c<br>
+                        </p>
+                    </details>
+               </div>
+
+                <script src="common.js"></script>
+                <script src="rRoulette.js"></script>
+
+            </main>
+
+<!-- <ASIDE1> region for change log ................................................................................ -->
+
+            <aside id="ASIDE1">
+                    <h3 id=ASIDE1H3>Changes 2022</h3>
+                <ul ID="ASIDE1UL">
+                    <li class="ASIDE1LI">02-Nov: start</li>
+                </ul>
+            </aside>
+
+<!-- <ASIDE2> region for corner image .............................................................................. -->
+
+            <aside id="ASIDE2">
+                <div id="ASIDE2DIV">
+                     <img id="ASIDE2IMG" src="cornerImage.png" alt="Cannot Load cornerImage.png">
+                </div>
+            </aside>
+
+<!-- <ASIDE3> region for corner image caption ...................................................................... -->
+
+            <aside id="ASIDE3">
+                <div id="ASIDE3DIV">
+                    <p id="ASIDE3-PARA">
+                    Matilda Cook in Magpies uniform before her next netball game 2022
+                    </p>
+                </div>
+            </aside>
+
+<!-- <FOOTER> region for page footer ............................................................................... -->
+
+            <footer id="FOOTER1">
+                <div id="FOOTER1OPTIONS-DIV">
+                    Corner Image Behaviour: <label id="footeroptionscichoice"></label>;
+                    Background Image: <label id="footeroptionsbackgroundimage"></label>;
+                    Show Webserver Log: <label id="footeroptionsshowserverlog"></label>;
+                    Show Session Log: <label id="footeroptionsshowsession"></label>;
+                    Left Links: <label id="footeroptionsleftlinks"></label>
+                </div>
+                <div id="FOOTER1DIV">
+                    <p>&copy; 2020 gjarman2020.com ... /var/www/html/index.html</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>
+

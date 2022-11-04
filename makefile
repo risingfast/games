@@ -8,6 +8,7 @@
 #       10-Dec-2021 add bookDelSeries
 #       10-Dec-2021 add bookDetails2
 #       20-Sep-2022 add .cgi targets
+#       02-Nov-2022 add rRoulette
 # $@ Target file
 # $^ Dependency files
 # $(CC) Compiler executable
@@ -19,9 +20,10 @@
 
 CC=gcc
 CFLAGS=-g -o
-SQL2FLAGS=-L/usryyp/lib/x86_64-linux-gnu
+SQL1FLAGS=-I/usr/include/mysql
+SQL2FLAGS=-L/usryyp/lib/x86_64-linux-gnu -lmysqlclient -lpthread -lz -lm -lrt -lssl -lcrypto -ldl -lresolv
 
-all: battleShips battleShips.cgi d_getInputTest d_regexWords d_regexWords.cgi guessAnIdiom guessAnIdiom.cgi
+all: battleShips battleShips.cgi d_getInputTest d_regexWords d_regexWords.cgi guessAnIdiom guessAnIdiom.cgi rRoulette rRoulette.cgi
 
 battleShips: battleShips.c d_getInput.c
 	$(CC) $(CFLAGS) $@ $^ $(SQL2FLAGS)
@@ -44,5 +46,11 @@ guessAnIdiom: guessAnIdiom.c d_getInput.c ../shared/rf50.c
 guessAnIdiom.cgi: guessAnIdiom.c d_getInput.c ../shared/rf50.c
 	$(CC) $(CFLAGS) $@ $^ $(SQL2FLAGS)
 
+rRoulette: rRoulette.c
+	$(CC) $(CFLAGS) $@ $(SQL1FLAGS) $^ $(SQL2FLAGS) -ljson-c
+
+rRoulette.cgi: rRoulette.c
+	$(CC) $(CFLAGS) $@ $(SQL1FLAGS) $^ $(SQL2FLAGS) -ljson-c
+
 clean:
-	rm -f *.o *.s *.i battleShips battleShips.cgi d_getInputTest d_regexWords d_regexWords.cgi guessAnIdiom guessAnIdiom.cgi
+	rm -f *.o *.s *.i battleShips battleShips.cgi d_getInputTest d_regexWords d_regexWords.cgi guessAnIdiom guessAnIdiom.cgi rRoulette rRoulette.cgi
