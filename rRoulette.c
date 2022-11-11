@@ -20,6 +20,9 @@
 //    01-Nov-2022 -- save the caSound to mySQL
 //    03-Nov-2022 -- shorten long lines with continuations
 //    03-Nov-2022 -- add exceptions for actions on an unloaded gun
+//    07-Nov-2022 -- changes sprintf() to asprintf()
+
+#define _GNU_SOURCE
 
 #include <mysql.h>
 #include <stdio.h>
@@ -28,8 +31,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-
-#define SQL_LEN 5000
 
 // global declarations -------------------------------------------------------------------------------------------------
 
@@ -52,11 +53,11 @@ int main(void) {
     bool bLive = false;                                                     // booloean to indicate a live or dead round
     char *sQueryString = NULL;                                   // string to hold the QUERY_STRING environment variable
     char *sAction = NULL;                                 // action taken from the web: clear, load, spin, pull, or look
-    char caSound[20] = {'N', 'o', 'n', 'e', '\0'};                            // sound of the gun when an action is taken
-    char caErrMsg[101] = "";                                                             // error message in JSON package
+    char caSound[20] = {'N', 'o', 'n', 'e', '\0'};                           // sound of the gun when an action is taken
+    char caErrMsg[101] = "";                                                            // error message in JSON package
     time_t t;                                                                             // time seed for random number
     char caResult[] = "Success";                                    // result of processing an action Success or Failure
-    char caSQL[SQL_LEN] = {'\0'};
+    char *strSQL = NULL;
 
 // print the html page content type header and CORS <header> block -----------------------------------------------------
 
@@ -70,16 +71,18 @@ int main(void) {
 // test for a null QUERY_STRING (applicable when submitted from the console) -------------------------------------------
 
     if (sQueryString == NULL) {
-        printf("QUERY_STRING is NULL. Expecting QUERY_STRING=\"Action=<action>\". Ending json4Ajax.cgi");
+        printf("QUERY_STRING is NULL. Expecting QUERY_STRING=\"Action=<action>\". Ending rRoulette.cgi");
         printf("\n\n");
+        
         return EXIT_FAILURE;
     }
 
 // test for a empty QUERY_STRING (applicable when submitted from the console) ------------------------------------------
 
     if (sQueryString[0] == '\0') {
-        printf("QUERY_STRING is empty. Expecting QUERY_STRING=\"Action=<action>\". Ending json4Ajax.cgi");
+        printf("QUERY_STRING is empty. Expecting QUERY_STRING=\"Action=<action>\". Ending rRoulette.cgi");
         printf("\n\n");
+        
         return EXIT_FAILURE;
     }
 
@@ -94,9 +97,10 @@ int main(void) {
 // test for a valid parameter name in QUERY_STRING ---------------------------------------------------------------------
 
     if (sAction[0] == '\0') {
-        printf("QUERY_STRING is \"%s\". Expecting QUERY_STRING=\"Action=<action>\". Ending json4Ajax.cgi", sQueryString);
+        printf("QUERY_STRING is \"%s\". Expecting QUERY_STRING=\"Action=<action>\". Ending rRoulette.cgi", sQueryString);
         printf("\n\n");
         free(sAction);
+        
         return EXIT_FAILURE;
     }
 
@@ -105,9 +109,10 @@ int main(void) {
     if ((strcmp(sAction, "Load") != 0) && (strcmp(sAction, "Spin") != 0) && (strcmp(sAction, "Pull") != 0) \
      && (strcmp(sAction, "Look") != 0) && (strcmp(sAction, "Clear") != 0)) {
         printf("Invalid action: QUERY_STRING=\"%s\" (not \"Action=Load\" or \"Spin\" or \"Pull\" or \"Look\"  \
-                or \"Clear\"). Ending json4Ajax.cgi", sQueryString);
+                or \"Clear\"). Ending rRoulette.cgi", sQueryString);
         printf("\n\n");
         free(sAction);
+        
         return EXIT_FAILURE;
     }
 
@@ -115,6 +120,7 @@ int main(void) {
 
    if (mysql_library_init(0, NULL, NULL)) {
        printf("Cannot initialize MySQL Client library\n");
+       
        return EXIT_FAILURE;
    }
 
@@ -136,18 +142,18 @@ int main(void) {
         free(sAction);
         mysql_library_end();
 
-        return  EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
 
 // set a SQL query to insert the new author ----------------------------------------------------------------------------
 
-    sprintf(caSQL, "SELECT `Gun ID`, `Game No`, `Round No`, `Chamber No`, `Live Round`, `Sound`"
+    asprintf(&strSQL, "SELECT `Gun ID`, `Game No`, `Round No`, `Chamber No`, `Live Round`, `Sound`"
                    "FROM risingfast.`Game Russian Roulette` "
                    "WHERE `Gun ID` = 1");
 
 // execute the query and check for no result ---------------------------------------------------------------------------
 
-    if(mysql_query(conn, caSQL) != 0)
+    if(mysql_query(conn, strSQL) != 0)
     {
         printf("\n");
         printf("mysql_query() error in function %s():\n\n%s", __func__, mysql_error(conn));
@@ -155,8 +161,11 @@ int main(void) {
         mysql_close(conn);
         free(sAction);
         mysql_library_end();
-        return  EXIT_FAILURE;
+        
+        return EXIT_FAILURE;
     }
+
+    free(strSQL);
 
 // store the result of the query ---------------------------------------------------------------------------------------
 
@@ -170,6 +179,7 @@ int main(void) {
         mysql_close(conn);
         free(sAction);
         mysql_library_end();
+
         return EXIT_FAILURE;
     }
 
@@ -259,16 +269,16 @@ int main(void) {
 
 // set a SQL query to save the new game settings -----------------------------------------------------------------------
 
-    sprintf(caSQL, "UPDATE risingfast.`Game Russian Roulette` SET `Game No` = %d "
-                   ", `Round No` = %d "
-                   ", `Chamber No` = %d "
-                   ", `Live Round` = %d "
-                   ", `Sound` = '%s' "
-                   ", `Result` = '%s'", iCompletedGames, iCompletedRounds, iChamber, bLive, caSound, caResult);
+    asprintf(&strSQL, "UPDATE risingfast.`Game Russian Roulette` SET `Game No` = %d "
+                    ", `Round No` = %d "
+                    ", `Chamber No` = %d "
+                    ", `Live Round` = %d "
+                    ", `Sound` = '%s' "
+                    ", `Result` = '%s'", iCompletedGames, iCompletedRounds, iChamber, bLive, caSound, caResult);
 
 // execute the update query and check for no result --------------------------------------------------------------------
 
-    if(mysql_query(conn, caSQL) != 0)
+    if(mysql_query(conn, strSQL) != 0)
     {
         printf("\n");
         printf("mysql_query() error in function %s():\n\n%s", __func__, mysql_error(conn));
@@ -276,7 +286,7 @@ int main(void) {
         mysql_close(conn);
         free(sAction);
         mysql_library_end();
-        return  EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
 
 // create a json object ------------------------------------------------------------------------------------------------
@@ -315,6 +325,7 @@ int main(void) {
 // * free resources used by the MySQL library --------------------------------------------------------------------------
 
     mysql_library_end();
+    free(strSQL);
 
     return EXIT_SUCCESS;
 }
