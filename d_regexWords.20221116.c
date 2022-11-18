@@ -38,7 +38,6 @@
 //       04-Jan-2021 webcode
 //       27-Mar-2021 reviewed all 
 //       26-Sep-2021 remove HTML and print results in new grid layout
-//       16-Nov-2022 change strcpy() to strncpy()
 //  Enhancements:
 //       Handle null value in number of returned results
 //
@@ -66,8 +65,8 @@ bool bOptExcludeApost;                                             // Option to 
 bool bOptLimitResults;                                                   // Option to limit results
 int iWordLimit;                                                        // Limit on returned results
 int iPttrnLimit;                                           // Limit on length of user input pattern
-char cyPttrnInp [MAX_LEN + 1] = {'\0'};                                       // User input pattern
-char cyPttrn[MAX_LEN + 1] = {'\0'};                                  // Matching pattern from input
+char cyPttrnInp [MAX_LEN] = "";                                               // User input pattern
+char cyPttrn[MAX_LEN] = "";                                          // Matching pattern from input
 int iPttrnLen;                                                      // Length of pattern from input
 bool bfConsoleApp = true;                                        // Flag for console app or web app
 
@@ -153,7 +152,7 @@ int main(void) {
 
         while(sGetToken != NULL) {
             if (strstr(sGetToken, "wp=") !=NULL) {
-                strncpy(cyPttrnInp, sGetToken + 3, MAX_LEN);
+                strcpy(cyPttrnInp, sGetToken + 3);
                 iPttrnLen = strlen(cyPttrnInp);
             } 
             else if (strstr(sGetToken, "rl=") !=NULL) {
@@ -272,7 +271,7 @@ int fGetWordPttrn() {
     extern bool bOptExcludeApost;                                  // Option to exclude apostrophes
     extern bool bOptLimitResults;                                        // Option to limit results
     extern int iPttrnLimit;                                   // Limit on user input pattern length
-    extern char cyPttrnInp [MAX_LEN + 1];                                     // User input pattern
+    extern char cyPttrnInp [MAX_LEN];                                         // User input pattern
     extern int iPttrnLen;                                                // Length of pattern input
     extern bool bfConsoleApp;                                    // Flag for console app or web app
 
@@ -310,8 +309,8 @@ int fFindWords() {
     extern bool bOptExcludeApost;                                  // Option to exclude apostrophes
     extern bool bOptLimitResults;                                        // Option to limit results
     extern int iWordLimit;                                             // Limit on returned results
-    extern char cyPttrnInp[MAX_LEN + 1];                             // Matching pattern from input
-    extern char cyPttrn[MAX_LEN + 1];                                // Matching pattern from input
+    extern char cyPttrnInp[MAX_LEN];                                 // Matching pattern from input
+    extern char cyPttrn[MAX_LEN];                                    // Matching pattern from input
     extern int iPttrnLen;                                                // Length of pattern input
     extern bool bfConsoleApp;                                    // Flag for console app or web app
 
@@ -327,7 +326,7 @@ int fFindWords() {
 
 // add Regex leading and trailing word markers to the pattern
 
-    strncpy(cyPttrn, cyPttrnInp, MAX_LEN);
+    strcpy(cyPttrn, cyPttrnInp);
     cyPttrn[iPttrnLen+1] = '$';
     cyPttrn[iPttrnLen+2] = '\0';
     cyPttrn[0] = '^';

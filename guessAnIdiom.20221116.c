@@ -37,7 +37,6 @@
 //      28-Sep-2021 removed HTML output for grid formatting
 //      28-Sep-2021 changed from POST to GET string handling
 //      15-Sep-2022 add Access-Control-Allow-Origin: * CORS http header
-//      16-Nov-2022 changes strcpy() to strncpy()
 //  Enhancements
 //      Create a file to remember sentence guesses and provide a count
 //      Use the get_string() function to read the full sentence guess in the console
@@ -74,7 +73,7 @@ int main(void) {
     int  intCount = 0;                           // utility loop counter
     int  intChoice;                              // game option chosen by user
     char cyInput[LEN80];                         // console input of letter or character
-    char cyWebContent[LEN100 + 1] = {'\0'};          // stdin content
+    char cyWebContent[LEN100] = {'\0'};          // stdin content
     int  intChrGuessCnt = 0;                     // count of character guesses
     int  intStcGuessCnt = 0;                     // count of sentence guesses
     char chrWebLetterResp;                       // letter guess submitted in the webform
@@ -348,7 +347,7 @@ int main(void) {
 
 // identify the web choice submitted (web)
 
-        strncpy(cyWebContent,getenv("QUERY_STRING"), LEN100);
+        strcpy(cyWebContent,getenv("QUERY_STRING"));
 
         if (strstr(cyWebContent, "Action=Letter") != NULL) {
             intRespValWeb = 1;
@@ -441,7 +440,7 @@ int main(void) {
 
 // extract the user's guess of the idiom from web content (web)
 
-            strncpy(cyWebIdiomResp, fUrlDecode(strstr(cyWebContent, "&Idiom=") + 7), LEN100);
+            strcpy(cyWebIdiomResp, fUrlDecode(strstr(cyWebContent, "&Idiom=") + 7));
             int i = 0;
             while (cyWebIdiomResp[i] != '\0') {
                 if (cyWebIdiomResp[i] == '+') {

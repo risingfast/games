@@ -20,11 +20,9 @@
 //    01-Nov-2022 -- save the caSound to mySQL
 //    03-Nov-2022 -- shorten long lines with continuations
 //    03-Nov-2022 -- add exceptions for actions on an unloaded gun
-//    07-Nov-2022 -- change sprintf() to asprintf()
-//    16-Nov-2022 -- change strcpy() to strncpy()
+//    07-Nov-2022 -- changes sprintf() to asprintf()
 
 #define _GNU_SOURCE
-#define ERR_MSG_LEN 100
 
 #include <mysql.h>
 #include <stdio.h>
@@ -55,10 +53,10 @@ int main(void) {
     bool bLive = false;                                                     // booloean to indicate a live or dead round
     char *sQueryString = NULL;                                   // string to hold the QUERY_STRING environment variable
     char *sAction = NULL;                                 // action taken from the web: clear, load, spin, pull, or look
-    char caSound[21] = {'N', 'o', 'n', 'e', '\0'};                           // sound of the gun when an action is taken
-    char caErrMsg[ERR_MSG_LEN + 1] = "";                                                // error message in JSON package
+    char caSound[20] = {'N', 'o', 'n', 'e', '\0'};                           // sound of the gun when an action is taken
+    char caErrMsg[101] = "";                                                            // error message in JSON package
     time_t t;                                                                             // time seed for random number
-    char caResult[8] = "Success\0";                                 // result of processing an action Success or Failure
+    char caResult[] = "Success";                                    // result of processing an action Success or Failure
     char *strSQL = NULL;
 
 // print the html page content type header and CORS <header> block -----------------------------------------------------
@@ -196,7 +194,7 @@ int main(void) {
     iCompletedRounds = atoi(row[2]);
     iChamber = atoi(row[3]);
     bLive = atoi(row[4]);
-    strncpy(caSound, row[5], 20);
+    strcpy(caSound, row[5]);
 
     mysql_free_result(res);
 
@@ -209,13 +207,13 @@ int main(void) {
         iChamber = iRand;
         iCompletedRounds = 0;
         if (bLive == true) {                                      // Load action is ignored if the gun is already loaded
-            strncpy(caErrMsg, "The gun is already loaded. Try spinning start a new game", ERR_MSG_LEN);
-            strncpy(caResult, "Exceptn", 7);
+            strcpy(caErrMsg, "The gun is already loaded. Try spinning start a new game");
+            strcpy(caResult, "Exceptn");
         } else if (bLive == false) {
             bLive = true;
-            strncpy(caSound, "Loading ", 20);
-            strncpy(caErrMsg, "Gun is loaded in a random chamber with one live bullet", ERR_MSG_LEN);
-            strncpy(caResult, "Success", 7);
+            strcpy(caSound, "Loading ");
+            strcpy(caErrMsg, "Gun is loaded in a random chamber with one live bullet");
+            strcpy(caResult, "Success");
         }
     } else if (strcmp(sAction, "Spin") == 0) {                         // the state of a bullet is unchanged by spinning
         srand((unsigned) time(&t));
@@ -224,49 +222,49 @@ int main(void) {
         if (bLive == true) {
             iCompletedGames++;
             iCompletedRounds = 0;
-            strncpy(caSound, "Spinning", 20);
-            strncpy(caErrMsg, "Gun chamber is spun. This action starts a new game only if the ammo is live", ERR_MSG_LEN);
-            strncpy(caResult, "Success", 7);
+            strcpy(caSound, "Spinning");
+            strcpy(caErrMsg, "Gun chamber is spun. This action starts a new game only if the ammo is live");
+            strcpy(caResult, "Success");
         } else if (bLive == false) {
-            strncpy(caSound, "Spinning", 20);
-            strncpy(caErrMsg, "You are spinning a gun with no live ammunition. Please reload", ERR_MSG_LEN);
-            strncpy(caResult, "Exceptn", 7);
+            strcpy(caSound, "Spinning");
+            strcpy(caErrMsg, "You are spinning a gun with no live ammunition. Please reload");
+            strcpy(caResult, "Exceptn");
         }
     } else if (strcmp(sAction, "Pull") == 0) {                                                  // the trigger is pulled
         iChamber = (iChamber + 1) % 6;
         if ((iChamber == 0) && (bLive == true)) {
             bLive = false;
-            strncpy(caSound, "Banging ", 20);
+            strcpy(caSound, "Banging ");
             iCompletedGames++;
             iCompletedRounds++;
-            strncpy(caErrMsg, "Trigger is pulled. The gun fired. A live bullet was staged in Chamber 5", ERR_MSG_LEN);
-            strncpy(caResult, "Success", 7);
+            strcpy(caErrMsg, "Trigger is pulled. The gun fired. A live bullet was staged in Chamber 5");
+            strcpy(caResult, "Success");
         } else if (bLive == false) {
-            strncpy(caErrMsg, "The gun is not loaded. Reload to start another game", ERR_MSG_LEN);
-            strncpy(caResult, "Exceptn", 7);
+            strcpy(caErrMsg, "The gun is not loaded. Reload to start another game");
+            strcpy(caResult, "Exceptn");
         } else {
-            strncpy(caSound, "Clicking", 20);
-            strncpy(caErrMsg, "Trigger is pulled. The gun did not fire. No live bullet was staged in Chamber 5", ERR_MSG_LEN);
-            strncpy(caResult, "Success", 7);
+            strcpy(caSound, "Clicking");
+            strcpy(caErrMsg, "Trigger is pulled. The gun did not fire. No live bullet was staged in Chamber 5");
+            strcpy(caResult, "Success");
             iCompletedRounds++;
         }
     } else if (strcmp(sAction, "Look") == 0) {                                         // no action is taken with a Look
-        strncpy(caSound, "Looking ", 20);
-        strncpy(caErrMsg, "Game statistics and gun status reprinted. Nothing is changed", ERR_MSG_LEN);
-        strncpy(caResult, "Success", 7);
+        strcpy(caSound, "Looking ");
+        strcpy(caErrMsg, "Game statistics and gun status reprinted. Nothing is changed");
+        strcpy(caResult, "Success");
     } else if (strcmp(sAction, "Clear") == 0) {                                     // clear the gun and game statistics
-        strncpy(caSound, "Clearing", 20);
-        strncpy(caErrMsg, "Chamber is cleared of ammunition and game statistics zeroed-out", ERR_MSG_LEN);
-        strncpy(caResult, "Success", 7);
+        strcpy(caSound, "Clearing");
+        strcpy(caErrMsg, "Chamber is cleared of ammunition and game statistics zeroed-out");
+        strcpy(caResult, "Success");
         iChamber = 0;
         iCompletedGames = 0;
         iCompletedRounds = 0;
         bLive = false;
     } else {
-        strncpy(caSound, "Unknown ", 20);
-        strncpy(sAction, "Unknown", 7);
-        strncpy(caErrMsg, "Unknown action. Nothing is changed. Play again", ERR_MSG_LEN);
-        strncpy(caResult, "Failure", 7);
+        strcpy(caSound, "Unknown ");
+        strcpy(sAction, "Unknown");
+        strcpy(caErrMsg, "Unknown action. Nothing is changed. Play again");
+        strcpy(caResult, "Failure");
     }
 
 // set a SQL query to save the new game settings -----------------------------------------------------------------------

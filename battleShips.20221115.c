@@ -35,7 +35,6 @@
 //      26-Sep-2021 remove getenv("CONTENT_LENGTH") as a test for web vs console
 //      26-Sep-2021 migrate to webcode for grid layout by removing HTML formatting
 //      27-Sep-2021 remove remaining HTML formatting for grid layout
-//      15-Nov-2022 replace strcpy() with strncpy()
 //  Enhancements:
 //
 
@@ -400,7 +399,7 @@ int main(void) {
 
 // identify the action submitted (web)
 
-        strncpy(input, getenv("QUERY_STRING"), MAXSZE);
+        strcpy(input, getenv("QUERY_STRING"));
 
         if (strstr(input, "Shoot") != NULL) {
             nRespValWeb = 1;
