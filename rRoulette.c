@@ -22,6 +22,7 @@
 //    03-Nov-2022 -- add exceptions for actions on an unloaded gun
 //    07-Nov-2022 -- change sprintf() to asprintf()
 //    16-Nov-2022 -- change strcpy() to strncpy()
+//    22-Jan-2023 -- set freed pointers to NULL
 
 #define _GNU_SOURCE
 #define ERR_MSG_LEN 100
@@ -102,6 +103,7 @@ int main(void) {
         printf("QUERY_STRING is \"%s\". Expecting QUERY_STRING=\"Action=<action>\". Ending rRoulette.cgi", sQueryString);
         printf("\n\n");
         free(sAction);
+        sAction = NULL;
         
         return EXIT_FAILURE;
     }
@@ -114,6 +116,7 @@ int main(void) {
                 or \"Clear\"). Ending rRoulette.cgi", sQueryString);
         printf("\n\n");
         free(sAction);
+        sAction = NULL;
         
         return EXIT_FAILURE;
     }
@@ -142,6 +145,7 @@ int main(void) {
 
         mysql_close(conn);
         free(sAction);
+        sAction = NULL;
         mysql_library_end();
 
         return EXIT_FAILURE;
@@ -162,6 +166,7 @@ int main(void) {
         printf("\n\n");
         mysql_close(conn);
         free(sAction);
+        sAction = NULL;
         mysql_library_end();
         
         return EXIT_FAILURE;
@@ -180,6 +185,7 @@ int main(void) {
         mysql_free_result(res);
         mysql_close(conn);
         free(sAction);
+        sAction = NULL;
         mysql_library_end();
 
         return EXIT_FAILURE;
@@ -287,6 +293,7 @@ int main(void) {
         printf("\n\n");
         mysql_close(conn);
         free(sAction);
+        sAction = NULL;
         mysql_library_end();
         return EXIT_FAILURE;
     }
@@ -319,6 +326,7 @@ int main(void) {
 
     json_object_put(jsonCgiResp);
     free(sAction);
+    sAction = NULL;
 
 // * close the database connection created by mysql_init(NULL) ---------------------------------------------------------
 
@@ -328,6 +336,7 @@ int main(void) {
 
     mysql_library_end();
     free(strSQL);
+    strSQL = NULL;
 
     return EXIT_SUCCESS;
 }
