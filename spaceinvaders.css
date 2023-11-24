@@ -1,0 +1,42 @@
+/* spaceinvaders.css - a css for spaceinvaders.html                                                                  */
+/* started - 15-Nov-2023                                                                                             */
+/* References:                                                                                                       */
+/*         HTML & CSS for Beginners Part 22: How to create a basic layout - the CSS                                  */
+/*         https://www.youtube.com/watch?v=qCBiKJbLcFI - Coding Space Invaders with Adam                             */
+/*     16-Nov-2023 - started                                                                                         */
+
+#heading-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 800px;
+    text-align: center;
+}
+
+#game-canvas {
+    background-color: grey;
+    box-shadow: black 20px 10px 50px;
+}
+
+#message-div {
+    width: 80%;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    max-width: 800px;
+    text-align: left;
+}
+
+#message-label {
+    display: inline-block;
+    width: 80px;
+}
+
+#message-input {
+    background-color: gainsboro;
+    border-width: 1px;
+    width: 80%;
+}
+
+
